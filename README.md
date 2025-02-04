@@ -66,7 +66,7 @@ goos: darwin
 goarch: arm64
 pkg: github.com/romshark/jpegbench
 cpu: Apple M1 Max
-                  ****             │   std.txt   │               opt.txt               │
+                               │   std.txt   │               opt.txt               │
                                │   sec/op    │   sec/op     vs base                │
 Decode/11375x8992_6mb.jpg-10     486.5m ± 1%   410.0m ± 1%  -15.72% (p=0.000 n=10)
 Decode/1280x719_84kb.jpg-10      6.498m ± 0%   5.366m ± 0%  -17.42% (p=0.000 n=10)
