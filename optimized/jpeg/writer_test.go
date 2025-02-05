@@ -20,7 +20,7 @@ import (
 // zigzag maps from the natural ordering to the zig-zag ordering. For example,
 // zigzag[0*8 + 3] is the zig-zag sequence number of the element in the fourth
 // column and first row.
-var zigzag = [blockSize]int{
+var zigzag = [blockSize]uint8{
 	0, 1, 5, 6, 14, 15, 27, 28,
 	2, 4, 7, 13, 16, 26, 29, 42,
 	3, 8, 12, 17, 25, 30, 41, 43,
@@ -32,7 +32,7 @@ var zigzag = [blockSize]int{
 }
 
 func TestZigUnzig(t *testing.T) {
-	for i := 0; i < blockSize; i++ {
+	for i := uint8(0); i < blockSize; i++ {
 		if unzig[zigzag[i]] != i {
 			t.Errorf("unzig[zigzag[%d]] == %d", i, unzig[zigzag[i]])
 		}
