@@ -1,5 +1,7 @@
 # Go's standard `image/jpeg` decoding optimization.
 
+Official Go PR: https://github.com/golang/go/pull/71618
+
 This repository demonstrates a potential optimization of decoding JPEG images
 in the Go standard library. This is achieved by unrolling
 unzig and shift-clamp loops in `scan.go`.
