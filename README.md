@@ -12,7 +12,6 @@ patch:
 <details>
 
 ```diff
-diff -ruN /usr/lib/go/src/image/jpeg/reader.go ./optimized/jpeg/reader.go
 --- /usr/lib/go/src/image/jpeg/reader.go	2025-02-05 01:18:32.000000000 +0100
 +++ ./optimized/jpeg/reader.go	2025-02-07 18:33:34.900861895 +0100
 @@ -75,7 +76,7 @@
@@ -26,8 +25,8 @@ diff -ruN /usr/lib/go/src/image/jpeg/reader.go ./optimized/jpeg/reader.go
  	12, 19, 26, 33, 40, 48, 41, 34,
 diff -ruN /usr/lib/go/src/image/jpeg/scan.go ./optimized/jpeg/scan.go
 --- /usr/lib/go/src/image/jpeg/scan.go	2025-02-05 01:18:32.000000000 +0100
-+++ ./optimized/jpeg/scan.go	2025-02-07 21:53:09.044893555 +0100
-@@ -465,9 +465,72 @@
++++ ./optimized/jpeg/scan.go	2025-02-07 22:39:23.342471482 +0100
+@@ -465,9 +465,73 @@
  // to the image.
  func (d *decoder) reconstructBlock(b *block, bx, by, compIndex int) error {
  	qt := &d.quant[d.comp[compIndex].tq]
@@ -35,6 +34,7 @@ diff -ruN /usr/lib/go/src/image/jpeg/scan.go ./optimized/jpeg/scan.go
 -		b[unzig[zig]] *= qt[zig]
 -	}
 +
++	// This sequence exactly follows the indexes of the unzig mapping.
 +	b[0] *= qt[0]
 +	b[1] *= qt[1]
 +	b[8] *= qt[2]
@@ -103,11 +103,12 @@ diff -ruN /usr/lib/go/src/image/jpeg/scan.go ./optimized/jpeg/scan.go
  	idct(b)
  	dst, stride := []byte(nil), 0
  	if d.nComp == 1 {
-@@ -486,22 +549,81 @@
+@@ -486,22 +550,82 @@
  			return UnsupportedError("too many components")
  		}
  	}
--	// Level shift by +128, clip to [0, 255], and write to dst.
++
+ 	// Level shift by +128, clip to [0, 255], and write to dst.
 -	for y := 0; y < 8; y++ {
 -		y8 := y * 8
 -		yStride := y * stride
@@ -121,7 +122,6 @@ diff -ruN /usr/lib/go/src/image/jpeg/scan.go ./optimized/jpeg/scan.go
 -				c += 128
 -			}
 -			dst[yStride+x] = uint8(c)
-+
 +	writeDst := func(index int) {
 +		c := (*b)[index] + 128
 +		if c < 0 {

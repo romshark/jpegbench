@@ -466,6 +466,7 @@ func (d *decoder) reconstructProgressiveImage() error {
 func (d *decoder) reconstructBlock(b *block, bx, by, compIndex int) error {
 	qt := &d.quant[d.comp[compIndex].tq]
 
+	// This sequence exactly follows the indexes of the unzig mapping.
 	b[0] *= qt[0]
 	b[1] *= qt[1]
 	b[8] *= qt[2]
@@ -550,6 +551,7 @@ func (d *decoder) reconstructBlock(b *block, bx, by, compIndex int) error {
 		}
 	}
 
+	// Level shift by +128, clip to [0, 255], and write to dst.
 	writeDst := func(index int) {
 		c := (*b)[index] + 128
 		if c < 0 {
