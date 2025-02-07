@@ -1,9 +1,8 @@
 package main
 
 import (
+	"image/jpeg"
 	"os"
-
-	"github.com/romshark/jpegbench/optimized/jpeg" // Optimized.
 )
 
 func main() {

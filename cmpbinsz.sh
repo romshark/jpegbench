@@ -51,4 +51,4 @@ fi
 echo "Binary sizes:"
 echo "  optimized: $OPT_SIZE ($OPT_SIZE_HR)"
 echo "  standard:  $STD_SIZE ($STD_SIZE_HR)"
-echo "optimized is bigger by: $DIFF_SIZE ($DIFF_SIZE_HR)"
+echo "diff:        $DIFF_SIZE ($DIFF_SIZE_HR)"
