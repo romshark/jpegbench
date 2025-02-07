@@ -6,7 +6,7 @@ unzig and shift-clamp loops in `scan.go`.
 
 On average across benchmarks (Go 1.23.6), this is **~13% faster on AMD64**
 and **~14%/11% faster on Apple Silicon ARM64 (M1/M4)**
-at the cost of slightly larger binary size (~18KiB).
+at the cost of slightly larger binary size (~16KiB).
 
 ### amd64 linux (Ryzen 7 5700X)
 
@@ -19,46 +19,46 @@ pkg: github.com/romshark/jpegbench
 cpu: AMD Ryzen 7 5700X 8-Core Processor             
                                │   std.txt   │               opt.txt               │
                                │   sec/op    │   sec/op     vs base                │
-Decode/11375x8992_6mb.jpg-16     600.6m ± 0%   505.0m ± 1%  -15.91% (p=0.000 n=10)
-Decode/1280x719_84kb.jpg-16      8.090m ± 0%   6.596m ± 0%  -18.47% (p=0.000 n=10)
-Decode/15400x6940_20mb.jpg-16     1.959 ± 0%    1.640 ± 0%  -16.27% (p=0.000 n=10)
-Decode/1920x1193_600kb.jpg-16    33.38m ± 0%   29.84m ± 0%  -10.59% (p=0.000 n=10)
-Decode/32x32_.jpg-16             22.41µ ± 0%   20.60µ ± 0%   -8.06% (p=0.000 n=10)
-Decode/6000x4000_2mb.jpg-16      359.2m ± 0%   317.8m ± 0%  -11.53% (p=0.000 n=10)
-Decode/600x239_35kb.jpg-16       2.707m ± 0%   2.427m ± 0%  -10.34% (p=0.000 n=10)
-Decode/9319x5792_6480kb.jpg-16   939.3m ± 0%   845.8m ± 0%   -9.95% (p=0.000 n=10)
-geomean                          39.96m        34.88m       -12.71%
+Decode/11375x8992_6mb.jpg-16     598.9m ± 0%   501.1m ± 0%  -16.32% (p=0.000 n=12)
+Decode/1280x719_84kb.jpg-16      8.092m ± 0%   6.549m ± 0%  -19.07% (p=0.000 n=12)
+Decode/15400x6940_20mb.jpg-16     1.950 ± 0%    1.626 ± 0%  -16.60% (p=0.000 n=12)
+Decode/1920x1193_600kb.jpg-16    33.36m ± 0%   29.45m ± 0%  -11.74% (p=0.000 n=12)
+Decode/32x32_.jpg-16             22.41µ ± 0%   21.31µ ± 0%   -4.92% (p=0.000 n=12)
+Decode/6000x4000_2mb.jpg-16      358.0m ± 0%   316.3m ± 0%  -11.64% (p=0.000 n=12)
+Decode/600x239_35kb.jpg-16       2.709m ± 0%   2.330m ± 0%  -13.98% (p=0.000 n=12)
+Decode/9319x5792_6480kb.jpg-16   939.6m ± 0%   844.3m ± 1%  -10.15% (p=0.000 n=12)
+geomean                          39.91m        34.66m       -13.15%
 
                                │   std.txt    │                opt.txt                │
                                │     B/op     │     B/op      vs base                 │
-Decode/11375x8992_6mb.jpg-16     97.58Mi ± 0%   97.58Mi ± 0%       ~ (p=0.433 n=10)
-Decode/1280x719_84kb.jpg-16      1.335Mi ± 0%   1.335Mi ± 0%       ~ (p=0.897 n=10)
-Decode/15400x6940_20mb.jpg-16    306.0Mi ± 0%   306.0Mi ± 0%       ~ (p=1.000 n=10)
-Decode/1920x1193_600kb.jpg-16    3.310Mi ± 0%   3.310Mi ± 0%  +0.00% (p=0.004 n=10)
-Decode/32x32_.jpg-16             15.02Ki ± 0%   15.02Ki ± 0%       ~ (p=1.000 n=10) ¹
-Decode/6000x4000_2mb.jpg-16      171.7Mi ± 0%   171.7Mi ± 0%       ~ (p=0.373 n=10)
-Decode/600x239_35kb.jpg-16       437.5Ki ± 0%   437.5Ki ± 0%       ~ (p=1.000 n=10) ¹
-Decode/9319x5792_6480kb.jpg-16   386.5Mi ± 0%   386.5Mi ± 0%       ~ (p=0.474 n=10)
+Decode/11375x8992_6mb.jpg-16     97.58Mi ± 0%   97.58Mi ± 0%       ~ (p=0.748 n=12)
+Decode/1280x719_84kb.jpg-16      1.335Mi ± 0%   1.335Mi ± 0%       ~ (p=0.572 n=12)
+Decode/15400x6940_20mb.jpg-16    306.0Mi ± 0%   306.0Mi ± 0%       ~ (p=1.000 n=12) ¹
+Decode/1920x1193_600kb.jpg-16    3.310Mi ± 0%   3.310Mi ± 0%   0.00% (p=0.040 n=12)
+Decode/32x32_.jpg-16             15.02Ki ± 0%   15.02Ki ± 0%       ~ (p=1.000 n=12) ¹
+Decode/6000x4000_2mb.jpg-16      171.7Mi ± 0%   171.7Mi ± 0%       ~ (p=1.000 n=12)
+Decode/600x239_35kb.jpg-16       437.5Ki ± 0%   437.5Ki ± 0%       ~ (p=1.000 n=12)
+Decode/9319x5792_6480kb.jpg-16   386.5Mi ± 0%   386.5Mi ± 0%       ~ (p=1.000 n=12)
 geomean                          9.276Mi        9.276Mi       +0.00%
 ¹ all samples are equal
 
                                │   std.txt   │               opt.txt                │
                                │  allocs/op  │  allocs/op   vs base                 │
-Decode/11375x8992_6mb.jpg-16      626.0 ± 0%    626.0 ± 0%       ~ (p=1.000 n=10)
-Decode/1280x719_84kb.jpg-16       71.00 ± 0%    71.00 ± 0%       ~ (p=1.000 n=10) ¹
-Decode/15400x6940_20mb.jpg-16    1.248k ± 0%   1.248k ± 0%       ~ (p=1.000 n=10)
-Decode/1920x1193_600kb.jpg-16     8.000 ± 0%    8.000 ± 0%       ~ (p=1.000 n=10) ¹
-Decode/32x32_.jpg-16              5.000 ± 0%    5.000 ± 0%       ~ (p=1.000 n=10) ¹
-Decode/6000x4000_2mb.jpg-16       11.00 ± 0%    11.00 ± 0%       ~ (p=1.000 n=10) ¹
-Decode/600x239_35kb.jpg-16        6.000 ± 0%    6.000 ± 0%       ~ (p=1.000 n=10) ¹
-Decode/9319x5792_6480kb.jpg-16    12.00 ± 0%    12.00 ± 0%       ~ (p=1.000 n=10)
+Decode/11375x8992_6mb.jpg-16      626.0 ± 0%    626.0 ± 0%       ~ (p=1.000 n=12) ¹
+Decode/1280x719_84kb.jpg-16       71.00 ± 0%    71.00 ± 0%       ~ (p=1.000 n=12) ¹
+Decode/15400x6940_20mb.jpg-16    1.248k ± 0%   1.248k ± 0%       ~ (p=1.000 n=12) ¹
+Decode/1920x1193_600kb.jpg-16     8.000 ± 0%    8.000 ± 0%       ~ (p=1.000 n=12) ¹
+Decode/32x32_.jpg-16              5.000 ± 0%    5.000 ± 0%       ~ (p=1.000 n=12) ¹
+Decode/6000x4000_2mb.jpg-16       11.00 ± 0%    11.00 ± 0%       ~ (p=1.000 n=12) ¹
+Decode/600x239_35kb.jpg-16        6.000 ± 0%    6.000 ± 0%       ~ (p=1.000 n=12) ¹
+Decode/9319x5792_6480kb.jpg-16    12.00 ± 0%    12.00 ± 0%       ~ (p=1.000 n=12)
 geomean                           33.93         33.93       +0.00%
 ¹ all samples are equal
 
 Binary sizes:
-  optimized: 1968985 (1.9M)
+  optimized: 1967278 (1.9M)
   standard:  1951199 (1.9M)
-diff:        17786 (18KiB)
+diff:        16079 (16KiB)
 ```
 
 </details>
@@ -237,11 +237,5 @@ go test -v ./...
 ## Running benchmark
 
 ```sh
-./bench.sh 10 .
-```
-
-## Running binary size comparison
-
-```sh
-./cmpbinsz.sh
+./bench.sh 10 . && ./cmpbinsz.sh
 ```
