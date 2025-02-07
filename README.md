@@ -5,9 +5,10 @@ in the Go standard library. This is achieved by unrolling
 unzig and dst writing loops in `scan.go`.
 
 On average across benchmarks (Go 1.23.6), this is **~13% faster on AMD64**
-and **~14% faster on ARM64 (M1)** at the cost of slightly larger binary size (~18KiB).
+and **~14%/11% faster on Apple Silicon ARM64 (M1/M4)**
+at the cost of slightly larger binary size (~18KiB).
 
-**amd64 linux**
+### amd64 linux (Ryzen 7 5700X)
 
 <details>
 
@@ -62,7 +63,7 @@ diff:        17786 (18KiB)
 
 </details>
 
-**arm64 darwin**
+### arm64 darwin (M1)
 
 <details>
 
@@ -113,6 +114,61 @@ Binary sizes:
   optimized: 1973185 (1.9M)
   standard:  1955439 (1.9M)
 diff:        17746 (17746B)
+```
+
+</details>
+
+### arm64 darwin (M4)
+
+<details>
+
+```
+goos: darwin
+goarch: arm64
+pkg: github.com/romshark/jpegbench
+cpu: Apple M4 Pro
+                               │   std.txt    │               opt.txt               │
+                               │    sec/op    │   sec/op     vs base                │
+Decode/11375x8992_6mb.jpg-14      317.2m ± 1%   276.6m ± 0%  -12.77% (p=0.000 n=10)
+Decode/1280x719_84kb.jpg-14       4.156m ± 0%   3.397m ± 0%  -18.26% (p=0.000 n=10)
+Decode/15400x6940_20mb.jpg-14    1056.3m ± 0%   905.0m ± 0%  -14.33% (p=0.000 n=10)
+Decode/1920x1193_600kb.jpg-14     20.76m ± 0%   19.29m ± 0%   -7.09% (p=0.000 n=10)
+Decode/32x32_.jpg-14              13.92µ ± 0%   13.13µ ± 0%   -5.69% (p=0.000 n=10)
+Decode/6000x4000_2mb.jpg-14       181.4m ± 1%   168.9m ± 1%   -6.90% (p=0.000 n=10)
+Decode/600x239_35kb.jpg-14        1.409m ± 0%   1.166m ± 0%  -17.19% (p=0.000 n=10)
+Decode/9319x5792_6480kb.jpg-14    502.0m ± 1%   473.6m ± 1%   -5.67% (p=0.000 n=10)
+geomean                           21.83m        19.40m       -11.12%
+
+                               │   std.txt    │                opt.txt                │
+                               │     B/op     │     B/op      vs base                 │
+Decode/11375x8992_6mb.jpg-14     97.58Mi ± 0%   97.58Mi ± 0%       ~ (p=0.536 n=10)
+Decode/1280x719_84kb.jpg-14      1.335Mi ± 0%   1.335Mi ± 0%       ~ (p=0.082 n=10)
+Decode/15400x6940_20mb.jpg-14    306.0Mi ± 0%   306.0Mi ± 0%       ~ (p=1.000 n=10)
+Decode/1920x1193_600kb.jpg-14    3.310Mi ± 0%   3.310Mi ± 0%       ~ (p=0.345 n=10)
+Decode/32x32_.jpg-14             15.02Ki ± 0%   15.02Ki ± 0%       ~ (p=1.000 n=10) ¹
+Decode/6000x4000_2mb.jpg-14      171.7Mi ± 0%   171.7Mi ± 0%       ~ (p=0.382 n=10)
+Decode/600x239_35kb.jpg-14       437.5Ki ± 0%   437.5Ki ± 0%       ~ (p=0.582 n=10)
+Decode/9319x5792_6480kb.jpg-14   386.5Mi ± 0%   386.5Mi ± 0%       ~ (p=1.000 n=10)
+geomean                          9.276Mi        9.276Mi       -0.00%
+¹ all samples are equal
+
+                               │   std.txt   │               opt.txt                │
+                               │  allocs/op  │  allocs/op   vs base                 │
+Decode/11375x8992_6mb.jpg-14      626.0 ± 0%    626.0 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/1280x719_84kb.jpg-14       71.00 ± 0%    71.00 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/15400x6940_20mb.jpg-14    1.248k ± 0%   1.248k ± 0%       ~ (p=1.000 n=10) ¹
+Decode/1920x1193_600kb.jpg-14     8.000 ± 0%    8.000 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/32x32_.jpg-14              5.000 ± 0%    5.000 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/6000x4000_2mb.jpg-14       11.00 ± 0%    11.00 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/600x239_35kb.jpg-14        6.000 ± 0%    6.000 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/9319x5792_6480kb.jpg-14    12.00 ± 0%    12.00 ± 0%       ~ (p=1.000 n=10) ¹
+geomean                           33.93         33.93       +0.00%
+¹ all samples are equal
+
+Binary sizes:
+  optimized: 1977345 (1.9M)
+  standard:  1959591 (1.9M)
+diff:        17754 (17754B)
 ```
 
 </details>
