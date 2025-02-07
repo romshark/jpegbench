@@ -4,7 +4,7 @@ This repository demonstrates a potential optimization of decoding JPEG images
 in the Go standard library. This is achieved by unrolling
 unzig and dst writing loops in `scan.go`.
 
-On average across benchmarks (Go 1.23.5), this is **~13% faster on AMD64**
+On average across benchmarks (Go 1.23.6), this is **~13% faster on AMD64**
 and **~14% faster on ARM64 (M1)** at the cost of slightly larger binary size (~18KiB).
 
 **amd64 linux**
