@@ -63,6 +63,61 @@ diff:        17786 (18KiB)
 
 </details>
 
+### amd64 darwin (i7-4850HQ)
+
+<details>
+
+```
+goos: darwin
+goarch: amd64
+pkg: github.com/romshark/jpegbench
+cpu: Intel(R) Core(TM) i7-4850HQ CPU @ 2.30GHz
+                              │   std.txt    │               opt.txt               │
+                              │    sec/op    │   sec/op     vs base                │
+Decode/11375x8992_6mb.jpg-8      766.2m ± 1%   682.4m ± 0%  -10.93% (p=0.000 n=10)
+Decode/1280x719_84kb.jpg-8      10.197m ± 0%   8.938m ± 0%  -12.35% (p=0.000 n=10)
+Decode/15400x6940_20mb.jpg-8      2.463 ± 2%    2.177 ± 0%  -11.58% (p=0.000 n=10)
+Decode/1920x1193_600kb.jpg-8     42.01m ± 1%   38.99m ± 0%   -7.18% (p=0.000 n=10)
+Decode/32x32_.jpg-8              31.93µ ± 0%   30.59µ ± 0%   -4.20% (p=0.000 n=10)
+Decode/6000x4000_2mb.jpg-8       480.6m ± 1%   441.8m ± 1%   -8.07% (p=0.000 n=10)
+Decode/600x239_35kb.jpg-8        3.446m ± 0%   3.057m ± 1%  -11.29% (p=0.000 n=10)
+Decode/9319x5792_6480kb.jpg-8     1.267 ± 1%    1.199 ± 6%   -5.36% (p=0.019 n=10)
+geomean                          52.08m        47.44m        -8.92%
+
+                              │   std.txt    │                opt.txt                │
+                              │     B/op     │     B/op      vs base                 │
+Decode/11375x8992_6mb.jpg-8     97.58Mi ± 0%   97.58Mi ± 0%       ~ (p=0.704 n=10)
+Decode/1280x719_84kb.jpg-8      1.335Mi ± 0%   1.335Mi ± 0%       ~ (p=0.467 n=10)
+Decode/15400x6940_20mb.jpg-8    306.0Mi ± 0%   306.0Mi ± 0%       ~ (p=0.721 n=10)
+Decode/1920x1193_600kb.jpg-8    3.310Mi ± 0%   3.310Mi ± 0%       ~ (p=0.515 n=10)
+Decode/32x32_.jpg-8             15.02Ki ± 0%   15.02Ki ± 0%       ~ (p=1.000 n=10) ¹
+Decode/6000x4000_2mb.jpg-8      171.7Mi ± 0%   171.7Mi ± 0%       ~ (p=1.000 n=10)
+Decode/600x239_35kb.jpg-8       437.5Ki ± 0%   437.5Ki ± 0%       ~ (p=0.657 n=10)
+Decode/9319x5792_6480kb.jpg-8   386.5Mi ± 0%   386.5Mi ± 0%       ~ (p=0.308 n=10)
+geomean                         9.276Mi        9.276Mi       -0.00%
+¹ all samples are equal
+
+                              │   std.txt    │               opt.txt                │
+                              │  allocs/op   │  allocs/op   vs base                 │
+Decode/11375x8992_6mb.jpg-8      626.0 ±  0%    626.0 ± 0%       ~ (p=0.474 n=10)
+Decode/1280x719_84kb.jpg-8       71.00 ±  0%    71.00 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/15400x6940_20mb.jpg-8    1.248k ±  0%   1.248k ± 0%       ~ (p=0.721 n=10)
+Decode/1920x1193_600kb.jpg-8     8.000 ±  0%    8.000 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/32x32_.jpg-8              5.000 ±  0%    5.000 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/6000x4000_2mb.jpg-8       11.00 ±  0%    11.00 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/600x239_35kb.jpg-8        6.000 ±  0%    6.000 ± 0%       ~ (p=1.000 n=10) ¹
+Decode/9319x5792_6480kb.jpg-8    12.50 ± 12%    12.00 ± 8%       ~ (p=0.308 n=10)
+geomean                          34.11          33.93       -0.51%
+¹ all samples are equal
+
+Binary sizes:
+  optimized: 1977345 (1.9M)
+  standard:  1959607 (1.9M)
+diff:        17738 (17738B)
+```
+
+</details>
+
 ### arm64 darwin (M1)
 
 <details>
