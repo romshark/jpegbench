@@ -32,7 +32,7 @@ var zigzag = [blockSize]uint8{
 }
 
 func TestZigUnzig(t *testing.T) {
-	for i := uint8(0); i < blockSize; i++ {
+	for i := range uint8(blockSize) {
 		if unzig[zigzag[i]] != i {
 			t.Errorf("unzig[zigzag[%d]] == %d", i, unzig[zigzag[i]])
 		}
