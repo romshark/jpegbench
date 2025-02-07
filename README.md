@@ -16,7 +16,7 @@ at the cost of slightly larger binary size (~16KiB).
 goos: linux
 goarch: amd64
 pkg: github.com/romshark/jpegbench
-cpu: AMD Ryzen 7 5700X 8-Core Processor             
+cpu: AMD Ryzen 7 5700X 8-Core Processor
                                │   std.txt   │               opt.txt               │
                                │   sec/op    │   sec/op     vs base                │
 Decode/11375x8992_6mb.jpg-16     598.9m ± 0%   501.1m ± 0%  -16.32% (p=0.000 n=12)
@@ -237,5 +237,5 @@ go test -v ./...
 ## Running benchmark
 
 ```sh
-./bench.sh 10 . && ./cmpbinsz.sh
+./bench.sh 12 . && ./cmpbinsz.sh
 ```
