@@ -553,7 +553,7 @@ func (d *decoder) reconstructBlock(b *block, bx, by, compIndex int) error {
 
 	// Level shift by +128, clip to [0, 255], and write to dst.
 	writeDst := func(index int) {
-		c = (*b)[index]
+		c := (*b)[index]
 		if c < -127 {
 			return
 		}
